@@ -9,9 +9,14 @@
 
 //第一部分，正则表达式的部分
 name regex
+singleLineComments \/\/.*
+multiAndInnerComments  \/\*(.*?\n)*?.*?\*\/
+octNum 0[1-7][0-7]*
+hexNum 0x(?i)[0-9|a-f]*
 %%
 //第二部分，识别部分
 {pattern} {/*A*/printf("test");/*B*/charLoc++;/*C*/}
+{}
 %%
 // 第三部分 代码部分
 
