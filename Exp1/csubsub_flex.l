@@ -11,7 +11,7 @@
 name regex
 %%
 //第二部分，识别部分
-{pattern} {output}
+{pattern} {/*A*/printf("test");/*B*/charLoc++;/*C*/}
 %%
 // 第三部分 代码部分
 
