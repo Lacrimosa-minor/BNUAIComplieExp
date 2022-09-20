@@ -1,16 +1,29 @@
 %option yylineno
+
 %{
-    int charLoc = 0;
-    //��¼���ڶ�ȡ���ڼ����ַ������tokenҪ��,ע�⻻�й��㡣
-    //����ʱʹ����������������滹�����⣬���Կ϶�����Ҫ�ĵ�
-    //��¼�����ľ���yylineno
+    int charLoc = 1;
+    //��¼���ڶ�ȡ���ڼ����ַ����tokenҪ��,ע�⻻�й��㡣
+    //����ʱʹ��������������滹�����⣬���Կ϶�����Ҫ�ĵ�
+    //��¼����ľ���yylineno
 %}
 
+SINGLECOMMENT \/\/.*
+MULTICOMMENT \/\*(.*?\n)*?.*?\*\/
+OCTINT 0[1-7][0-7]*
+HEXINT 0x(?i)[0-9|a-f]*
+EFLOAT [1-9].[0-9]*E[+,-][1-9][0-9]*
 
-//��һ���֣��������ʽ�Ĳ���
-name regex
 %%
-//�ڶ����֣�ʶ�𲿷�
+"\n" {charLoc = 1;}
+"\t+" {charLoc += yyleng;}
+" +" {charLoc += yyleng;}
+
+{SINGLECOMMENT} {/*A*/printf("COMMENT at line %d, char %D: %s.\n", yylineno, charLoc, yytext);/*B*/charLoc += yyleng;/*C*/}
+{MULTICOMMENT} {/*A*/printf("COMMENT at line %d, char %D: %s.\n", yylineno, charLoc, yytext);/*B*/charLoc += yyleng;/*C*/}
+{OCTINT} {/*A*/printf("OCTINT at line %d, char %D: %s.\n", yylineno, charLoc, yytext);/*B*/charLoc += yyleng;/*C*/}
+{HEXINT} {/*A*/printf("HEXINT at line %d, char %D: %s.\n", yylineno, charLoc, yytext);/*B*/charLoc += yyleng;/*C*/}
+{EFLOAT} {/*A*/printf("EFLOAT at line %d, char %D: %s.\n", yylineno, charLoc, yytext);/*B*/charLoc += yyleng;/*C*/}
+
 ";" {/*A*/printf("SEMI at line %d,char %D: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
 "," {/*A*/printf("COMMA at line %d,char %D: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
 "=" {/*A*/printf("ASSIGNOP at line %d,char %D: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
@@ -36,8 +49,8 @@ name regex
 "else" {/*A*/printf("ELSE at line %d,char %D: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
 "while" {/*A*/printf("WHILE at line %d,char %D: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
 
-
 %%
+
 int main(int argc, char** argv){
     if(argc>1){
         if(!(yyin=fopen(argv[1],"r"))){
