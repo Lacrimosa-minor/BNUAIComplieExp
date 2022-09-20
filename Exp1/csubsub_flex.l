@@ -1,22 +1,30 @@
 %option yylineno
+
 %{
-    int charLoc = 0;
+    int charLoc = 1;
     //记录现在读取到第几个字符，输出token要用,注意换行归零。
     //先暂时使用这个变量，这里面还有问题，所以肯定还是要改的
     //记录行数的就是yylineno
 %}
 
+SINGLECOMMENT \/\/.*
+MULTICOMMENT \/\*(.*?\n)*?.*?\*\/
+OCTINT 0[1-7][0-7]*
+HEXINT 0x(?i)[0-9|a-f]*
+EFLOAT [1-9].[0-9]*E[+,-][1-9][0-9]*
 
-//第一部分，正则表达式的部分
-name regex
-singleLineComments \/\/.*
-multiAndInnerComments  \/\*(.*?\n)*?.*?\*\/
-octNum 0[1-7][0-7]*
-hexNum 0x(?i)[0-9|a-f]*
 %%
-//第二部分，识别部分
-{pattern} {/*A*/printf("test");/*B*/charLoc++;/*C*/}
-{}
+{pattern} {/*A*/printf("test");/*B*/charLoc += yyleng;/*C*/}
+
+{SINGLECOMMENT} {/*A*/printf("COMMENT at line %d, char %D: %s.\n", yylineno, charLoc, yytext);/*B*/charLoc += yyleng;/*C*/}
+{MULTICOMMENT} {/*A*/printf("COMMENT at line %d, char %D: %s.\n", yylineno, charLoc, yytext);/*B*/charLoc += yyleng;/*C*/}
+{OCTINT} {/*A*/printf("OCTINT at line %d, char %D: %s.\n", yylineno, charLoc, yytext);/*B*/charLoc += yyleng;/*C*/}
+{HEXINT} {/*A*/printf("HEXINT at line %d, char %D: %s.\n", yylineno, charLoc, yytext);/*B*/charLoc += yyleng;/*C*/}
+{EFLOAT} {/*A*/printf("EFLOAT at line %d, char %D: %s.\n", yylineno, charLoc, yytext);/*B*/charLoc += yyleng;/*C*/}
+
+"\n" {charLoc = 1;}
+"\s+" {charLoc += yyleng;}
+
 %%
 // 第三部分 代码部分
 
