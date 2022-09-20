@@ -2,9 +2,9 @@
 
 %{
     int charLoc = 1;
-    //¼ÇÂ¼ÏÖÔÚ¶ÁÈ¡µ½µÚ¼¸¸ö×Ö·û£¬Êä³ötokenÒªÓÃ,×¢Òâ»»ÐÐ¹éÁã¡£
-    //ÏÈÔÝÊ±Ê¹ÓÃÕâ¸ö±äÁ¿£¬ÕâÀïÃæ»¹ÓÐÎÊÌâ£¬ËùÒÔ¿Ï¶¨»¹ÊÇÒª¸ÄµÄ
-    //¼ÇÂ¼ÐÐÊýµÄ¾ÍÊÇyylineno
+    //ï¿½ï¿½Â¼ï¿½ï¿½ï¿½Ú¶ï¿½È¡ï¿½ï¿½ï¿½Ú¼ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½tokenÒªï¿½ï¿½,×¢ï¿½â»»ï¿½Ð¹ï¿½ï¿½ã¡£
+    //ï¿½ï¿½ï¿½ï¿½Ê±Ê¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ»¹ï¿½ï¿½ï¿½ï¿½ï¿½â£¬ï¿½ï¿½ï¿½Ô¿Ï¶ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½Äµï¿½
+    //ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½Ä¾ï¿½ï¿½ï¿½yylineno
 %}
 
 SINGLECOMMENT \/\/.*
@@ -14,7 +14,9 @@ HEXINT 0x(?i)[0-9|a-f]*
 EFLOAT [1-9].[0-9]*E[+,-][1-9][0-9]*
 
 %%
-{pattern} {/*A*/printf("test");/*B*/charLoc += yyleng;/*C*/}
+"\n" {charLoc = 1;}
+"\t+" {charLoc += yyleng;}
+" +" {charLoc += yyleng;}
 
 {SINGLECOMMENT} {/*A*/printf("COMMENT at line %d, char %D: %s.\n", yylineno, charLoc, yytext);/*B*/charLoc += yyleng;/*C*/}
 {MULTICOMMENT} {/*A*/printf("COMMENT at line %d, char %D: %s.\n", yylineno, charLoc, yytext);/*B*/charLoc += yyleng;/*C*/}
@@ -22,18 +24,40 @@ EFLOAT [1-9].[0-9]*E[+,-][1-9][0-9]*
 {HEXINT} {/*A*/printf("HEXINT at line %d, char %D: %s.\n", yylineno, charLoc, yytext);/*B*/charLoc += yyleng;/*C*/}
 {EFLOAT} {/*A*/printf("EFLOAT at line %d, char %D: %s.\n", yylineno, charLoc, yytext);/*B*/charLoc += yyleng;/*C*/}
 
-"\n" {charLoc = 1;}
-"\s+" {charLoc += yyleng;}
+";" {/*A*/printf("SEMI at line %d,char %D: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
+"," {/*A*/printf("COMMA at line %d,char %D: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
+"=" {/*A*/printf("ASSIGNOP at line %d,char %D: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
+">|<|>=|<=|==|!=" {/*A*/printf("RELOP at line %d,char %D: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
+"+" {/*A*/printf("PLUS at line %d,char %D: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
+"-" {/*A*/printf("MINUS at line %d,char %D: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
+"*" {/*A*/printf("STAR at line %d,char %D: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
+"/" {/*A*/printf("DIV at line %d,char %D: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
+"&&" {/*A*/printf("AND at line %d,char %D: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
+"||" {/*A*/printf("OR at line %d,char %D: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
+"." {/*A*/printf("DOT at line %d,char %D: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
+"!" {/*A*/printf("NOT at line %d,char %D: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
+"int|float" {/*A*/printf("TYPE at line %d,char %D: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
+"(" {/*A*/printf("LP at line %d,char %D: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
+")" {/*A*/printf("RP at line %d,char %D: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
+"[" {/*A*/printf("LB at line %d,char %D: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
+"]" {/*A*/printf("RB at line %d,char %D: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
+"{" {/*A*/printf("LC at line %d,char %D: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
+"}" {/*A*/printf("RC at line %d,char %D: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
+"struct" {/*A*/printf("STRUCT at line %d,char %D: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
+"return" {/*A*/printf("RETURN at line %d,char %D: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
+"if" {/*A*/printf("IF at line %d,char %D: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
+"else" {/*A*/printf("ELSE at line %d,char %D: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
+"while" {/*A*/printf("WHILE at line %d,char %D: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
 
 %%
-// µÚÈý²¿·Ö ´úÂë²¿·Ö
 
-//¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª·Ö¸îÏß
-// µÚÒ»½×¶ÎÈÎÎñ£º 
-// °üî£¸ºÔðÐ´27¸ötokenÖÐ³ýÁËINT£¬FLOATºÍIDÖ®ÍâµÄ²¿·Ö£¬²»ÒªÐ´µ½regexÀïÃæ£¬Ö±½ÓÐ´µ½pattern²¿·Ö,°ÑµÚÈý²¿·ÖµÄ¶ÁÈ¡³ÌÐò³ÌÐòÒ²Ð´ºÃ
-// ÉÛ×ÓÐùÑÐ¾¿Ò»ÏÂINT,FLOATºÍIDÏà¹Øregex,ÒÔ¼°Î´¶¨Òå±êÊ¶·ûµÄ´¦Àí
-// ¶¡´ºÉê°Ñ×¢ÊÍµÄÊ¶±ðºÍ¸½¼ÓÒªÇó×öÁË
-// È»ºó¿ªÊ¼µÚÒ»´ÎºÏ´úÂëdebug£¬ÔÛÃÇÒªÃ»Ê±¼äÁË£¡£¡£¡
-//¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª·Ö¸îÏß
-//»áÒé¼ÍÒª£ºÃ¿¸öÈËµÄÈÎÎñ£¬Ê±¼ä°²ÅÅ£¬¹ØÓÚcharLocµÄ×¢ÒâÊÂÏî£¨ÁôÏÂ×¢ÊÍÌæ»»Î»ÖÃ£©£¬
-//¹ØÓÚºöÂÔ¿Õ°××Ö·ûµÄÎÊÌâ£¨ÏÈºöÂÔ×Å£¬°Ñ»ù±¾¶«Î÷Æ´³öÀ´£©£¬Ð´×÷×¢ÒâÅÅÐò£¨ÏÈID,ºóFLOAT£©
+int main(int argc, char** argv){
+    if(argc>1){
+        if(!(yyin=fopen(argv[1],"r"))){
+            perror(argv[1]);
+            return 1;
+        }
+    }
+    while (yylex()!=0);
+    return 0;
+}
