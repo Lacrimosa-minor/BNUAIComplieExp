@@ -2,26 +2,36 @@
 
 %{
     int charLoc = 1;
-    //��¼���ڶ�ȡ���ڼ����ַ����tokenҪ��,ע�⻻�й��㡣
-    //����ʱʹ��������������滹�����⣬���Կ϶�����Ҫ�ĵ�
-    //��¼����ľ���yylineno
 %}
 
+LETTER [a-zA-Z]
+DIGIT [0-9]
+ID ({LETTER}|_)({LETTER}|_|{DIGIT})*
+INTEGER ([0]|[[1-9]{DIGIT}*])
+INT [+-]?{INTEGER}
+FLOAT (DIGIT)*[.](DIGIT)*([Ee]{INT10})?
 SINGLECOMMENT \/\/.*
 MULTICOMMENT \/\*(.*?\n)*?.*?\*\/
-OCTINT 0[1-7][0-7]*
-HEXINT 0x(?i)[0-9|a-f]*
+OCT 0[1-7][0-7]*
+HEX (?i)0x[0-9|a-f]*
 EFLOAT [1-9].[0-9]*E[+,-][1-9][0-9]*
+ERROROCT ([0])([0-9]|LETTER)+
+ERRORHEX (?i)0x[0-9a-z]+
+ERRORFLOAT ({INTEGER}*[Ee].|(DIGIT)*[.](DIGIT)*[Ee][^{INT}])
 
 %%
 "\n" {charLoc = 1;}
 "\t+" {charLoc += yyleng;}
 " +" {charLoc += yyleng;}
 
+{ID} {printf("ID at line %d,char %d: %s.\n",yylineno,charLoc,yytext);charLoc += yyleng;}
+{INT} {printf("INT at line %d,char %d: %s.\n",yylineno,charLoc,yytext);charLoc += yyleng;}
+{FLOAT} {printf("FLOAT at line %d,char %d: %s.\n",yylineno,charLoc,yytext);charLoc += yyleng;}
+
 {SINGLECOMMENT} {/*A*/printf("COMMENT at line %d, char %D: %s.\n", yylineno, charLoc, yytext);/*B*/charLoc += yyleng;/*C*/}
 {MULTICOMMENT} {/*A*/printf("COMMENT at line %d, char %D: %s.\n", yylineno, charLoc, yytext);/*B*/charLoc += yyleng;/*C*/}
-{OCTINT} {/*A*/printf("OCTINT at line %d, char %D: %s.\n", yylineno, charLoc, yytext);/*B*/charLoc += yyleng;/*C*/}
-{HEXINT} {/*A*/printf("HEXINT at line %d, char %D: %s.\n", yylineno, charLoc, yytext);/*B*/charLoc += yyleng;/*C*/}
+{OCT} {/*A*/printf("OCT at line %d, char %D: %s.\n", yylineno, charLoc, yytext);/*B*/charLoc += yyleng;/*C*/}
+{HEX} {/*A*/printf("HEX at line %d, char %D: %s.\n", yylineno, charLoc, yytext);/*B*/charLoc += yyleng;/*C*/}
 {EFLOAT} {/*A*/printf("EFLOAT at line %d, char %D: %s.\n", yylineno, charLoc, yytext);/*B*/charLoc += yyleng;/*C*/}
 
 ";" {/*A*/printf("SEMI at line %d,char %D: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
@@ -48,6 +58,11 @@ EFLOAT [1-9].[0-9]*E[+,-][1-9][0-9]*
 "if" {/*A*/printf("IF at line %d,char %D: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
 "else" {/*A*/printf("ELSE at line %d,char %D: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
 "while" {/*A*/printf("WHILE at line %d,char %D: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
+
+{ERROROCT} {printf("ERROR at line %d,char %d: Illegal octal number: '%s'.\n",yylineno,charLoc,yytext);charLoc += yyleng;}
+{ERRORHEX} {printf("ERROR at line %d,char %d: Illegal octal number: '%s'.\n",yylineno,charLoc,yytext);charLoc += yyleng;}
+{ERRORFLOAT} {printf("ERROR at line %d,char %d: Illegal float number: '%s'.\n",yylineno,charLoc,yytext);charLoc += yyleng;}
+. {printf("ERROR at line %d,char %d: Myterious character: '%s'.\n",yylineno,charLoc,yytext);charLoc += yyleng;)}
 
 %%
 
