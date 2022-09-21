@@ -9,7 +9,7 @@ DIGIT [0-9]
 ID ({LETTER}|_)({LETTER}|_|{DIGIT})*
 INTEGER ([0]|[[1-9]{DIGIT}*])
 INT [+-]?{INTEGER}
-FLOAT ([1-9][0-9]+\.[0-9]*)|([1-9]*\.[0-9]+)
+FLOAT ([0-9]+\.[0-9]*)|([0-9]*\.[0-9]+)
 SINGLECOMMENT \/\/.*
 MULTICOMMENT \/\*(.*?\n)*?.*?\*\/
 OCT 0[1-7][0-7]*
