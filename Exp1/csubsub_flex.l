@@ -62,7 +62,7 @@ ERRORFLOAT ({INTEGER}*[Ee]\.|(DIGIT)*\.(DIGIT)*[Ee][^{INT}])
 {ERROROCT} {printf("ERROR at line %d,char %d: Illegal octal number: '%s'.\n",yylineno,charLoc,yytext);charLoc += yyleng;}
 {ERRORHEX} {printf("ERROR at line %d,char %d: Illegal octal number: '%s'.\n",yylineno,charLoc,yytext);charLoc += yyleng;}
 {ERRORFLOAT} {printf("ERROR at line %d,char %d: Illegal float number: '%s'.\n",yylineno,charLoc,yytext);charLoc += yyleng;}
-. {printf("ERROR at line %d,char %d, Myterious character: '%s'.\n",yylineno,charLoc,yytext);charLoc += yyleng;)}
+. {printf("ERROR at line %d,char %d, Myterious character: '%s'.\n",yylineno,charLoc,yytext);charLoc += yyleng;}
 
 %%
 int main(int argc, char** argv){
