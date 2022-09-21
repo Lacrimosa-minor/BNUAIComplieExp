@@ -6,15 +6,15 @@
 
 CUTTER [^0-9A-Za-z_]
 ID [a-zA-Z_][a-zA-Z0-9_]*/{CUTTER}
-INT [+-]?[1-9][0-9]+/{CUTTER}
-FLOAT ([0-9]+\.[0-9]*)|([0-9]*\.[0-9]+)/{CUTTER}
+INT [+-]?[1-9][0-9]+
+FLOAT ([0-9]+\.[0-9]*)|([0-9]*\.[0-9]+)
 SINGLECOMMENT \/\/.*
 MULTICOMMENT \/\*(.*?\n)*?.*?\*\
-OCT 0[1-7][0-7]*/{CUTTER}
-HEX 0[x,X][0-9a-fA-F]*/{CUTTER}
-EFLOAT [1-9]\.[0-9]+[Ee][+,-]?[1-9][0-9]*/{CUTTER}
+OCT 0[1-7][0-7]*
+HEX 0[x,X][0-9a-fA-F]*
+EFLOAT [1-9]\.[0-9]+[Ee][+,-]?[1-9][0-9]*
 SPACE [ \s\t]+
-TYPE (int)|(float)/{CUTTER}
+TYPE (int)|(float)
 RELOP >|<|(>=)|(<=)|(==)|(!=)
 
 %%
