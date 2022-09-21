@@ -19,8 +19,9 @@ ERROROCT ([0])([0-9]|LETTER)+
 ERRORHEX 0[x,X][LETTER|DIGIT]+
 ERRORFLOAT ({INTEGER}*[Ee]\.|(DIGIT)*\.(DIGIT)*[Ee][^{INT}])
 
-SPACE ( +)
+SPACE \s+
 TAB \t+
+
 %%
 "\n" {charLoc = 1;}
 {SPACE} {charLoc += yyleng;}
