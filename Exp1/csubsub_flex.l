@@ -10,7 +10,7 @@ FLOAT ([0-9]+\.[0-9]*)|([0-9]*\.[0-9]+)/[ \s\t\n]
 SINGLECOMMENT \/\/.*
 MULTICOMMENT \/\*(.*?\n)*?.*?\*\/
 OCT 0[1-7][0-7]*/[ \s\t\n]
-HEX 0[x,X][0-9a-fA-F]*/[ \s\t\n]
+HEX 0[x,X][0-9a-fA-F]*/([ \s\t\n]+)
 EFLOAT [1-9]\.[0-9]+[Ee][+,-]?[1-9][0-9]*/[ \s\t\n]
 SPACE [ \s\t]+
 TYPE (int)|(float)/[ \s\t\n]
