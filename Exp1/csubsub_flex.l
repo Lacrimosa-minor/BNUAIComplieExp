@@ -4,6 +4,7 @@
     int charLoc = 1;
 %}
 
+CUTTER [^0-9A-Za-z_]
 ID [a-zA-Z_][a-zA-Z0-9_]*/{CUTTER}
 INT [+-]?[1-9][0-9]+/{CUTTER}
 FLOAT ([0-9]+\.[0-9]*)|([0-9]*\.[0-9]+)/{CUTTER}
@@ -15,7 +16,6 @@ EFLOAT [1-9]\.[0-9]+[Ee][+,-]?[1-9][0-9]*/{CUTTER}
 SPACE [ \s\t]+
 TYPE (int)|(float)/{CUTTER}
 RELOP >|<|(>=)|(<=)|(==)|(!=)
-CUTTER [^0-9A-Za-z_]
 
 %%
 "\n" {charLoc = 1;}
