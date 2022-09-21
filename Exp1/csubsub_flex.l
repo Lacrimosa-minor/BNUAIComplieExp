@@ -24,39 +24,39 @@ ERRORFLOAT ({INTEGER}*[Ee]\.|(DIGIT)*\.(DIGIT)*[Ee][^{INT}])
 "\t+" {charLoc += yyleng;}
 " +" {charLoc += yyleng;}
 
-"struct" {/*A*/printf("STRUCT at line %d,char %D: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
-"return" {/*A*/printf("RETURN at line %d,char %D: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
-"if" {/*A*/printf("IF at line %d,char %D: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
-"else" {/*A*/printf("ELSE at line %d,char %D: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
-"while" {/*A*/printf("WHILE at line %d,char %D: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
+"struct" {/*A*/printf("STRUCT at line %d,char %d: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
+"return" {/*A*/printf("RETURN at line %d,char %d: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
+"if" {/*A*/printf("IF at line %d,char %d: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
+"else" {/*A*/printf("ELSE at line %d,char %d: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
+"while" {/*A*/printf("WHILE at line %d,char %d: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
 {INT} {printf("INT at line %d,char %d: %s.\n",yylineno,charLoc,yytext);charLoc += yyleng;}
 {FLOAT} {printf("FLOAT at line %d,char %d: %s.\n",yylineno,charLoc,yytext);charLoc += yyleng;}
 
-{SINGLECOMMENT} {/*A*/printf("COMMENT at line %d, char %D: %s.\n", yylineno, charLoc, yytext);/*B*/charLoc += yyleng;/*C*/}
-{MULTICOMMENT} {/*A*/printf("COMMENT at line %d, char %D: %s.\n", yylineno, charLoc, yytext);/*B*/charLoc += yyleng;/*C*/}
-{OCT} {/*A*/printf("OCT at line %d, char %D: %s.\n", yylineno, charLoc, yytext);/*B*/charLoc += yyleng;/*C*/}
-{HEX} {/*A*/printf("HEX at line %d, char %D: %s.\n", yylineno, charLoc, yytext);/*B*/charLoc += yyleng;/*C*/}
-{EFLOAT} {/*A*/printf("EFLOAT at line %d, char %D: %s.\n", yylineno, charLoc, yytext);/*B*/charLoc += yyleng;/*C*/}
+{SINGLECOMMENT} {/*A*/printf("COMMENT at line %d, char %d: %s.\n", yylineno, charLoc, yytext);/*B*/charLoc += yyleng;/*C*/}
+{MULTICOMMENT} {/*A*/printf("COMMENT at line %d, char %d: %s.\n", yylineno, charLoc, yytext);/*B*/charLoc += yyleng;/*C*/}
+{OCT} {/*A*/printf("OCT at line %d, char %d: %s.\n", yylineno, charLoc, yytext);/*B*/charLoc += yyleng;/*C*/}
+{HEX} {/*A*/printf("HEX at line %d, char %d: %s.\n", yylineno, charLoc, yytext);/*B*/charLoc += yyleng;/*C*/}
+{EFLOAT} {/*A*/printf("EFLOAT at line %d, char %d: %s.\n", yylineno, charLoc, yytext);/*B*/charLoc += yyleng;/*C*/}
 
-";" {/*A*/printf("SEMI at line %d,char %D: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
-"," {/*A*/printf("COMMA at line %d,char %D: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
-"=" {/*A*/printf("ASSIGNOP at line %d,char %D: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
-">|<|>=|<=|==|!=" {/*A*/printf("RELOP at line %d,char %D: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
-"\+" {/*A*/printf("PLUS at line %d,char %D: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
-"-" {/*A*/printf("MINUS at line %d,char %D: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
-"\*" {/*A*/printf("STAR at line %d,char %D: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
-"\/" {/*A*/printf("DIV at line %d,char %D: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
-"&&" {/*A*/printf("AND at line %d,char %D: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
-"||" {/*A*/printf("OR at line %d,char %D: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
-"\." {/*A*/printf("DOT at line %d,char %D: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
-"!" {/*A*/printf("NOT at line %d,char %D: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
-"int|float" {/*A*/printf("TYPE at line %d,char %D: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
-"\(" {/*A*/printf("LP at line %d,char %D: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
-"\)" {/*A*/printf("RP at line %d,char %D: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
-"\[" {/*A*/printf("LB at line %d,char %D: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
-"\]" {/*A*/printf("RB at line %d,char %D: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
-"\{" {/*A*/printf("LC at line %d,char %D: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
-"\}" {/*A*/printf("RC at line %d,char %D: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
+";" {/*A*/printf("SEMI at line %d,char %d: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
+"," {/*A*/printf("COMMA at line %d,char %d: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
+"=" {/*A*/printf("ASSIGNOP at line %d,char %d: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
+">|<|>=|<=|==|!=" {/*A*/printf("RELOP at line %d,char %d: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
+"\+" {/*A*/printf("PLUS at line %d,char %d: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
+"-" {/*A*/printf("MINUS at line %d,char %d: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
+"\*" {/*A*/printf("STAR at line %d,char %d: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
+"\/" {/*A*/printf("DIV at line %d,char %d: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
+"&&" {/*A*/printf("AND at line %d,char %d: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
+"||" {/*A*/printf("OR at line %d,char %d: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
+"\." {/*A*/printf("DOT at line %d,char %d: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
+"!" {/*A*/printf("NOT at line %d,char %d: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
+"int|float" {/*A*/printf("TYPE at line %d,char %d: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
+"\(" {/*A*/printf("LP at line %d,char %d: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
+"\)" {/*A*/printf("RP at line %d,char %d: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
+"\[" {/*A*/printf("LB at line %d,char %d: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
+"\]" {/*A*/printf("RB at line %d,char %d: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
+"\{" {/*A*/printf("LC at line %d,char %d: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
+"\}" {/*A*/printf("RC at line %d,char %d: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
 
 {ID} {printf("ID at line %d,char %d: %s.\n",yylineno,charLoc,yytext);charLoc += yyleng;}
 {ERROROCT} {printf("ERROR at line %d,char %d: Illegal octal number: '%s'.\n",yylineno,charLoc,yytext);charLoc += yyleng;}
