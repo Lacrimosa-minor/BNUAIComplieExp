@@ -9,11 +9,11 @@ DIGIT [0-9]
 ID ({LETTER}|_)({LETTER}|_|{DIGIT})*
 INTEGER ([0]|[[1-9]{DIGIT}*])
 INT [+-]?{INTEGER}
-FLOAT (DIGIT)*[.](DIGIT)*([Ee]{INT10})?
+FLOAT (DIGIT)*[.](DIGIT)*([Ee]{INT})?
 SINGLECOMMENT \/\/.*
 MULTICOMMENT \/\*(.*?\n)*?.*?\*\/
 OCT 0[1-7][0-7]*
-HEX (?i)0x[0-9|a-f]*
+HEX (?i)0x[0-9a-f]*
 EFLOAT [1-9].[0-9]*E[+,-][1-9][0-9]*
 ERROROCT ([0])([0-9]|LETTER)+
 ERRORHEX (?i)0x[0-9a-z]+
