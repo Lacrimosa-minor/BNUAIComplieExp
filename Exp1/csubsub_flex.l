@@ -9,15 +9,15 @@ DIGIT [0-9]
 ID ({LETTER}|_)({LETTER}|_|{DIGIT})*
 INTEGER ([0]|[[1-9]{DIGIT}*])
 INT [+-]?{INTEGER}
-FLOAT (DIGIT)*[.](DIGIT)*([Ee]{INT})?
+FLOAT (DIGIT)+\.(DIGIT)*
 SINGLECOMMENT \/\/.*
 MULTICOMMENT \/\*(.*?\n)*?.*?\*\/
 OCT 0[1-7][0-7]*
 HEX 0[x,X][0-9a-fA-F]*
-EFLOAT [1-9].[0-9]*E[+,-][1-9][0-9]*
+EFLOAT [1-9]\.[0-9]*E[+,-][1-9][0-9]*
 ERROROCT ([0])([0-9]|LETTER)+
 ERRORHEX 0[x,X][LETTER|DIGIT]+
-ERRORFLOAT ({INTEGER}*[Ee].|(DIGIT)*[.](DIGIT)*[Ee][^{INT}])
+ERRORFLOAT ({INTEGER}*[Ee]\.|(DIGIT)*\.(DIGIT)*[Ee][^{INT}])
 
 %%
 "\n" {charLoc = 1;}
