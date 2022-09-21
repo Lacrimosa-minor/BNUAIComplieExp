@@ -4,16 +4,16 @@
     int charLoc = 1;
 %}
 
-ID [a-zA-Z_][a-zA-Z0-9_]*\b
-INT [+-]?[1-9][0-9]+\b
-FLOAT ([0-9]+\.[0-9]*\b)|([0-9]*\.[0-9]+\b)
+ID [a-zA-Z_][a-zA-Z0-9_]*/[ \s\t\n]
+INT [+-]?[1-9][0-9]+/[ \s\t\n]
+FLOAT ([0-9]+\.[0-9]*)|([0-9]*\.[0-9]+)/[ \s\t\n]
 SINGLECOMMENT \/\/.*
 MULTICOMMENT \/\*(.*?\n)*?.*?\*\/
-OCT 0[1-7][0-7]*\b
-HEX 0[x,X][0-9a-fA-F]*\b
-EFLOAT [1-9]\.[0-9]+[Ee][+,-]?[1-9][0-9]*\b
+OCT 0[1-7][0-7]*/[ \s\t\n]
+HEX 0[x,X][0-9a-fA-F]*/[ \s\t\n]
+EFLOAT [1-9]\.[0-9]+[Ee][+,-]?[1-9][0-9]*/[ \s\t\n]
 SPACE [ \s\t]+
-TYPE (int\b)|(float\b)
+TYPE (int)|(float)/[ \s\t\n]
 RELOP >|<|(>=)|(<=)|(==)|(!=)
 
 %%
