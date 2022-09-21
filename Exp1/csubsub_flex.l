@@ -13,10 +13,10 @@ FLOAT (DIGIT)*[.](DIGIT)*([Ee]{INT})?
 SINGLECOMMENT \/\/.*
 MULTICOMMENT \/\*(.*?\n)*?.*?\*\/
 OCT 0[1-7][0-7]*
-HEX (?i)0x[0-9a-f]*
+HEX 0[x,X][0-9a-fA-F]*
 EFLOAT [1-9].[0-9]*E[+,-][1-9][0-9]*
 ERROROCT ([0])([0-9]|LETTER)+
-ERRORHEX (?i)0x[0-9a-z]+
+ERRORHEX 0[x,X][LETTER|DIGIT]+
 ERRORFLOAT ({INTEGER}*[Ee].|(DIGIT)*[.](DIGIT)*[Ee][^{INT}])
 
 %%
@@ -62,7 +62,7 @@ ERRORFLOAT ({INTEGER}*[Ee].|(DIGIT)*[.](DIGIT)*[Ee][^{INT}])
 {ERROROCT} {printf("ERROR at line %d,char %d: Illegal octal number: '%s'.\n",yylineno,charLoc,yytext);charLoc += yyleng;}
 {ERRORHEX} {printf("ERROR at line %d,char %d: Illegal octal number: '%s'.\n",yylineno,charLoc,yytext);charLoc += yyleng;}
 {ERRORFLOAT} {printf("ERROR at line %d,char %d: Illegal float number: '%s'.\n",yylineno,charLoc,yytext);charLoc += yyleng;}
-. {printf("ERROR at line %d,char %d: Myterious character: '%s'.\n",yylineno,charLoc,yytext);charLoc += yyleng;)}
+. {printf("ERROR at line %d,char %d, Myterious character: '%s'.\n",yylineno,charLoc,yytext);charLoc += yyleng;)}
 
 %%
 
