@@ -8,7 +8,7 @@ ID [a-zA-Z_][a-zA-Z0-9_]*
 INT [+-]?[1-9][0-9]+
 FLOAT [+-]?([0-9]+\.[0-9]*)|([0-9]*\.[0-9]+)
 SINGLECOMMENT \/\/.*
-MULTICOMMENT \/\*(.*?\n)*?.*?\*\
+MULTICOMMENT \/\*(.*?\n)*?.*?\*\/
 OCT 0[1-7][0-7]*
 HEX 0[xX][0-9a-fA-F]+
 EFLOAT ({FLOAT}|{INT})[Ee]{INT}
