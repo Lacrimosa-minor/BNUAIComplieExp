@@ -4,15 +4,17 @@
     int charLoc = 1;
 %}
 
-CUTTER [^0-9A-Za-z_]
-ID [a-zA-Z_][a-zA-Z0-9_]*/{CUTTER}
+ID [a-zA-Z_][a-zA-Z0-9_]*
 INT [+-]?[1-9][0-9]+
-FLOAT ([0-9]+\.[0-9]*)|([0-9]*\.[0-9]+)
+FLOAT [+-]?([0-9]+\.[0-9]*)|([0-9]*\.[0-9]+)
 SINGLECOMMENT \/\/.*
 MULTICOMMENT \/\*(.*?\n)*?.*?\*\
 OCT 0[1-7][0-7]*
-HEX 0[x,X][0-9a-fA-F]*
-EFLOAT [1-9]\.[0-9]+[Ee][+,-]?[1-9][0-9]*
+HEX 0[xX][0-9a-fA-F]+
+EFLOAT ({FLOAT}|{INT})[Ee]{INT}
+ERROROCT [0]([0-7]*[89]+)+[0-9]*
+ERRORHEX 0[xX][0-9a-zA-Z]+
+ERRORFLOAT ({FLOAT}|{INT})[Ee][a-zA-Z]?({FLOAT})?
 SPACE [ \s\t]+
 TYPE (int)|(float)
 RELOP >|<|(>=)|(<=)|(==)|(!=)
@@ -26,6 +28,9 @@ RELOP >|<|(>=)|(<=)|(==)|(!=)
 "if" {/*A*/printf("IF at line %d,char %d: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
 "else" {/*A*/printf("ELSE at line %d,char %d: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
 "while" {/*A*/printf("WHILE at line %d,char %d: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
+{ERRORFLOAT} {/*A*/printf("ERROR at line %d, char %d: Illegal float: %s.\n", yylineno, charLoc, yytext);/*B*/charLoc += yyleng;/*C*/}
+{ERRORHEX} {/*A*/printf("ERROR at line %d, char %d: Illegal Hex %s.\n", yylineno, charLoc, yytext);/*B*/charLoc += yyleng;/*C*/}
+{ERROROCT} {/*A*/printf("ERROR at line %d, char %d: Illegal Oct %s.\n", yylineno, charLoc, yytext);/*B*/charLoc += yyleng;/*C*/}
 {EFLOAT} {/*A*/printf("FLOAT at line %d, char %d: %s.\n", yylineno, charLoc, yytext);/*B*/charLoc += yyleng;/*C*/}
 {FLOAT} {printf("FLOAT at line %d,char %d: %s.\n",yylineno,charLoc,yytext);charLoc += yyleng;}
 {HEX} {/*A*/printf("HEX at line %d, char %d: %s.\n", yylineno, charLoc, yytext);/*B*/charLoc += yyleng;/*C*/}
