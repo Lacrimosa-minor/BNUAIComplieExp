@@ -24,42 +24,42 @@ RELOP >|<|(>=)|(<=)|(==)|(!=)
 "\n" {charLoc = 1;}
 {SPACE} {charLoc += yyleng;}
 {TAB} {charLoc += yyleng * 4;}
-"struct" {/*A*/printf("STRUCT at line %d,char %d: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
-"return" {/*A*/printf("RETURN at line %d,char %d: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
-"if" {/*A*/printf("IF at line %d,char %d: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
-"else" {/*A*/printf("ELSE at line %d,char %d: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
-"while" {/*A*/printf("WHILE at line %d,char %d: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
-{ERRORFLOAT} {/*A*/printf("ERROR at line %d, char %d: Illegal float: %s.\n", yylineno, charLoc, yytext);/*B*/charLoc += yyleng;/*C*/}
-{ERRORHEX} {/*A*/printf("ERROR at line %d, char %d: Illegal Hex %s.\n", yylineno, charLoc, yytext);/*B*/charLoc += yyleng;/*C*/}
-{ERROROCT} {/*A*/printf("ERROR at line %d, char %d: Illegal Oct %s.\n", yylineno, charLoc, yytext);/*B*/charLoc += yyleng;/*C*/}
-{EFLOAT} {/*A*/printf("FLOAT at line %d, char %d: %s.\n", yylineno, charLoc, yytext);/*B*/charLoc += yyleng;/*C*/}
+"struct" { printf("STRUCT at line %d,char %d: %s.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
+"return" { printf("RETURN at line %d,char %d: %s.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
+"if" { printf("IF at line %d,char %d: %s.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
+"else" { printf("ELSE at line %d,char %d: %s.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
+"while" { printf("WHILE at line %d,char %d: %s.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
+{ERRORFLOAT} { printf("ERROR at line %d, char %d: Illegal float: %s.\n", yylineno, charLoc, yytext); charLoc += yyleng; }
+{ERRORHEX} { printf("ERROR at line %d, char %d: Illegal Hex %s.\n", yylineno, charLoc, yytext); charLoc += yyleng; }
+{ERROROCT} { printf("ERROR at line %d, char %d: Illegal Oct %s.\n", yylineno, charLoc, yytext); charLoc += yyleng; }
+{EFLOAT} { printf("FLOAT at line %d, char %d: %s.\n", yylineno, charLoc, yytext); charLoc += yyleng; }
 {FLOAT} {printf("FLOAT at line %d,char %d: %s.\n",yylineno,charLoc,yytext);charLoc += yyleng;}
-{HEX} {/*A*/printf("HEX at line %d, char %d: %s.\n", yylineno, charLoc, yytext);/*B*/charLoc += yyleng;/*C*/}
+{HEX} { printf("HEX at line %d, char %d: %s.\n", yylineno, charLoc, yytext); charLoc += yyleng; }
 {INT} {printf("INT at line %d,char %d: %s.\n",yylineno,charLoc,yytext);charLoc += yyleng;}
-{OCT} {/*A*/printf("OCT at line %d, char %d: %s.\n", yylineno, charLoc, yytext);/*B*/charLoc += yyleng;/*C*/}
-{SINGLECOMMENT} {/*A*/printf("COMMENT at line %d, char %d: %s.\n", yylineno, charLoc, yytext);/*B*/charLoc += yyleng;/*C*/}
-{MULTICOMMENT} {/*A*/printf("COMMENT at line %d, char %d: %s.\n", yylineno, charLoc, yytext);/*B*/charLoc += yyleng;/*C*/}
-{TYPE} {/*A*/printf("TYPE at line %d,char %d: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
-";" {/*A*/printf("SEMI at line %d,char %d: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
-"," {/*A*/printf("COMMA at line %d,char %d: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
-"=" {/*A*/printf("ASSIGNOP at line %d,char %d: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
-{RELOP} {/*A*/printf("RELOP at line %d,char %d: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
-"+" {/*A*/printf("PLUS at line %d,char %d: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
-"-" {/*A*/printf("MINUS at line %d,char %d: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
-"*" {/*A*/printf("STAR at line %d,char %d: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
-"/" {/*A*/printf("DIV at line %d,char %d: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
-"&&" {/*A*/printf("AND at line %d,char %d: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
-"||" {/*A*/printf("OR at line %d,char %d: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
-"." {/*A*/printf("DOT at line %d,char %d: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
-"!" {/*A*/printf("NOT at line %d,char %d: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
-"(" {/*A*/printf("LP at line %d,char %d: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
-")" {/*A*/printf("RP at line %d,char %d: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
-"[" {/*A*/printf("LB at line %d,char %d: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
-"]" {/*A*/printf("RB at line %d,char %d: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
-"{" {/*A*/printf("LC at line %d,char %d: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
-"}" {/*A*/printf("RC at line %d,char %d: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
-{ID} {/*A*/printf("ID at line %d,char %d: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
-. {/*A*/printf("ERROR at line %d,char %d, Myterious character: '%s'.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
+{OCT} { printf("OCT at line %d, char %d: %s.\n", yylineno, charLoc, yytext); charLoc += yyleng; }
+{SINGLECOMMENT} { printf("COMMENT at line %d, char %d: %s.\n", yylineno, charLoc, yytext); charLoc += yyleng; }
+{MULTICOMMENT} { printf("COMMENT at line %d, char %d: %s.\n", yylineno, charLoc, yytext); charLoc += yyleng; }
+{TYPE} { printf("TYPE at line %d,char %d: %s.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
+";" { printf("SEMI at line %d,char %d: %s.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
+"," { printf("COMMA at line %d,char %d: %s.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
+"=" { printf("ASSIGNOP at line %d,char %d: %s.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
+{RELOP} { printf("RELOP at line %d,char %d: %s.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
+"+" { printf("PLUS at line %d,char %d: %s.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
+"-" { printf("MINUS at line %d,char %d: %s.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
+"*" { printf("STAR at line %d,char %d: %s.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
+"/" { printf("DIV at line %d,char %d: %s.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
+"&&" { printf("AND at line %d,char %d: %s.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
+"||" { printf("OR at line %d,char %d: %s.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
+"." { printf("DOT at line %d,char %d: %s.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
+"!" { printf("NOT at line %d,char %d: %s.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
+"(" { printf("LP at line %d,char %d: %s.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
+")" { printf("RP at line %d,char %d: %s.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
+"[" { printf("LB at line %d,char %d: %s.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
+"]" { printf("RB at line %d,char %d: %s.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
+"{" { printf("LC at line %d,char %d: %s.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
+"}" { printf("RC at line %d,char %d: %s.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
+{ID} { printf("ID at line %d,char %d: %s.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
+. { printf("ERROR at line %d,char %d, Myterious character: '%s'.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
 
 %%
 
@@ -79,6 +79,6 @@ int main(int argc, char** argv){
 // ERRORHEX 0[x,X][LETTER|DIGIT]+
 // ERRORFLOAT [0-9]*\.
 // ERROREEFLOAT 
-// {ERROROCT} {/*A*/printf("ERROR at line %d,char %d: Illegal octal number: '%s'.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
-// {ERRORHEX} {/*A*/printf("ERROR at line %d,char %d: Illegal octal number: '%s'.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
+// {ERROROCT} { printf("ERROR at line %d,char %d: Illegal octal number: '%s'.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
+// {ERRORHEX} { printf("ERROR at line %d,char %d: Illegal octal number: '%s'.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
 // {ERRORFLOAT} {printf("ERROR at line %d,char %d: Illegal float number: '%s'.\n",yylineno,charLoc,yytext);charLoc += yyleng;}
