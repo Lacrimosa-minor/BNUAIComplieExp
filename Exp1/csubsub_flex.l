@@ -10,19 +10,20 @@ FLOAT [+-]?([0-9]+\.[0-9]*)|([0-9]*\.[0-9]+)
 SINGLECOMMENT \/\/.*
 MULTICOMMENT \/\*(.*?\n)*?.*?\*\/
 OCT 0[1-7][0-7]*
-HEX 0[xX][0-9a-fA-F]+
+HEX 0[xX][0-9a-fA-F]*
 EFLOAT ({FLOAT}|{INT})[Ee]{INT}
 ERROROCT [0]([0-7]*[89]+)+[0-9]*
 ERRORHEX 0[xX][0-9a-zA-Z]+
 ERRORFLOAT ({FLOAT}|{INT})[Ee][a-zA-Z]?({FLOAT})?
-SPACE [ \s\t]+
+SPACE [ \s]+
+TAB \t+
 TYPE (int)|(float)
 RELOP >|<|(>=)|(<=)|(==)|(!=)
 
 %%
 "\n" {charLoc = 1;}
 {SPACE} {charLoc += yyleng;}
-
+{TAB} {charLoc += yyleng * 4;}
 "struct" {/*A*/printf("STRUCT at line %d,char %d: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
 "return" {/*A*/printf("RETURN at line %d,char %d: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
 "if" {/*A*/printf("IF at line %d,char %d: %s.\n",yylineno,charLoc,yytext);/*B*/charLoc += yyleng;/*C*/}
