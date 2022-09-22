@@ -13,7 +13,7 @@ OCT 0[1-7][0-7]*
 HEX 0[xX][0-9a-fA-F]*
 EFLOAT ({FLOAT}|{INT})[Ee]{INT}
 ERROROCT [0]([0-7]*[89]+)+[0-9]*
-ERRORHEX 0[xX][0-9a-zA-Z]+
+ERRORHEX 0[xX]([0-9a-fA-F]*[g-zG-Z]+)+[0-9a-zA-Z]*
 ERRORFLOAT ({FLOAT}|{INT})[Ee][a-zA-Z]?({FLOAT})?
 SPACE [ \s]+
 TAB \t+
