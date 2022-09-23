@@ -5,13 +5,13 @@
 %}
 
 ID [a-zA-Z_][a-zA-Z0-9_]*
-INT [+-]?[1-9][0-9]+
+INT [+-]?(0|[1-9][0-9]*)
 FLOAT [+-]?([0-9]+\.[0-9]*)|([0-9]*\.[0-9]+)
 SINGLECOMMENT \/\/.*
 MULTICOMMENT \/\*(.*?\n)*?.*?\*\/
-OCT 0[1-7][0-7]*
+OCT 0[0-7][0-7]*
 HEX 0[xX][0-9a-fA-F]*
-EFLOAT ({FLOAT}|{INT})[Ee]{INT}
+EFLOAT ({FLOAT}|{INT}\.)[Ee]{INT}
 ERROROCT [0]([0-7]*[89]+)+[0-9]*
 ERRORHEX 0[xX]([0-9a-fA-F]*[g-zG-Z]+)+[0-9a-zA-Z]*
 ERRORFLOAT ({FLOAT}|{INT})[Ee][a-zA-Z]?({FLOAT})?
