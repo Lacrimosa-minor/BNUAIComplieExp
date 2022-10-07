@@ -58,7 +58,7 @@ RELOP >|<|(>=)|(<=)|(==)|(!=)
 "]" { printf("RB at line %d,char %d: %s.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
 "{" { printf("LC at line %d,char %d: %s.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
 "}" { printf("RC at line %d,char %d: %s.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
-{ID} {reutn ID}
+{ID} { printf("ID at line %d,char %d: %s.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
 . { printf("ERROR at line %d,char %d, Myterious character: '%s'.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
 
 %%
