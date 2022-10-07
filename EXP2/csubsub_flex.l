@@ -34,9 +34,9 @@ RELOP >|<|(>=)|(<=)|(==)|(!=)
 {ERROROCT} { printf("ERROR at line %d, char %d: Illegal Oct %s.\n", yylineno, charLoc, yytext); charLoc += yyleng; }
 {EFLOAT} { printf("FLOAT at line %d, char %d: %s.\n", yylineno, charLoc, yytext); charLoc += yyleng; }
 {FLOAT} {printf("FLOAT at line %d,char %d: %s.\n",yylineno,charLoc,yytext);charLoc += yyleng;}
-{HEX} { printf("HEX at line %d, char %d: %s.\n", yylineno, charLoc, yytext); charLoc += yyleng; }
+{HEX} { printf("INT at line %d, char %d: %s.\n", yylineno, charLoc, yytext); charLoc += yyleng; }
 {INT} {printf("INT at line %d,char %d: %s.\n",yylineno,charLoc,yytext);charLoc += yyleng;}
-{OCT} { printf("OCT at line %d, char %d: %s.\n", yylineno, charLoc, yytext); charLoc += yyleng; }
+{OCT} { printf("INT at line %d, char %d: %s.\n", yylineno, charLoc, yytext); charLoc += yyleng; }
 {SINGLECOMMENT} { printf("COMMENT at line %d, char %d: %s.\n", yylineno, charLoc, yytext); charLoc += yyleng; }
 {MULTICOMMENT} { printf("COMMENT at line %d, char %d: %s.\n", yylineno, charLoc, yytext); charLoc += yyleng; }
 {TYPE} { printf("TYPE at line %d,char %d: %s.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
@@ -58,7 +58,7 @@ RELOP >|<|(>=)|(<=)|(==)|(!=)
 "]" { printf("RB at line %d,char %d: %s.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
 "{" { printf("LC at line %d,char %d: %s.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
 "}" { printf("RC at line %d,char %d: %s.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
-{ID} { printf("ID at line %d,char %d: %s.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
+{ID} {reutn ID}
 . { printf("ERROR at line %d,char %d, Myterious character: '%s'.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
 
 %%
