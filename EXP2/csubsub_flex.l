@@ -1,7 +1,14 @@
 %option yylineno
 
 %{
+    #include "syntax.tab.h"
+    int yycolumn=1;
     int charLoc = 1;
+    #define YY_USER_ACTION
+    yylloc.first_line=yylloc.last_line=yylineno;\
+    yylloc.first_column=yycolumn;\
+    yylloc.last_column=yycolumn+yyleng-1;\
+    yycolumn+=yyleng;
 %}
 
 ID [a-zA-Z_][a-zA-Z0-9_]*
@@ -21,57 +28,58 @@ TYPE (int)|(float)
 RELOP >|<|(>=)|(<=)|(==)|(!=)
 
 %%
-"\n" {charLoc = 1;}
+"\n" {charLoc = 1; yycolumn = 1; }
 {SPACE} {charLoc += yyleng;}
 {TAB} {charLoc += yyleng * 4;}
-"struct" { printf("STRUCT at line %d,char %d: %s.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
-"return" { printf("RETURN at line %d,char %d: %s.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
-"if" { printf("IF at line %d,char %d: %s.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
-"else" { printf("ELSE at line %d,char %d: %s.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
-"while" { printf("WHILE at line %d,char %d: %s.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
+"struct" { return STRUCT ; }
+"return" { return RETURN ; }
+"if" { return IF ; }
+"else" { return ELSE ; }
+"while" { return WHILE ; }
 {ERRORFLOAT} { printf("ERROR at line %d, char %d: Illegal float: %s.\n", yylineno, charLoc, yytext); charLoc += yyleng; }
 {ERRORHEX} { printf("ERROR at line %d, char %d: Illegal Hex %s.\n", yylineno, charLoc, yytext); charLoc += yyleng; }
 {ERROROCT} { printf("ERROR at line %d, char %d: Illegal Oct %s.\n", yylineno, charLoc, yytext); charLoc += yyleng; }
-{EFLOAT} { printf("FLOAT at line %d, char %d: %s.\n", yylineno, charLoc, yytext); charLoc += yyleng; }
-{FLOAT} {printf("FLOAT at line %d,char %d: %s.\n",yylineno,charLoc,yytext);charLoc += yyleng;}
-{HEX} { printf("HEX at line %d, char %d: %s.\n", yylineno, charLoc, yytext); charLoc += yyleng; }
-{INT} {printf("INT at line %d,char %d: %s.\n",yylineno,charLoc,yytext);charLoc += yyleng;}
-{OCT} { printf("OCT at line %d, char %d: %s.\n", yylineno, charLoc, yytext); charLoc += yyleng; }
-{SINGLECOMMENT} { printf("COMMENT at line %d, char %d: %s.\n", yylineno, charLoc, yytext); charLoc += yyleng; }
-{MULTICOMMENT} { printf("COMMENT at line %d, char %d: %s.\n", yylineno, charLoc, yytext); charLoc += yyleng; }
-{TYPE} { printf("TYPE at line %d,char %d: %s.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
-";" { printf("SEMI at line %d,char %d: %s.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
-"," { printf("COMMA at line %d,char %d: %s.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
-"=" { printf("ASSIGNOP at line %d,char %d: %s.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
-{RELOP} { printf("RELOP at line %d,char %d: %s.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
-"+" { printf("PLUS at line %d,char %d: %s.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
-"-" { printf("MINUS at line %d,char %d: %s.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
-"*" { printf("STAR at line %d,char %d: %s.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
-"/" { printf("DIV at line %d,char %d: %s.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
-"&&" { printf("AND at line %d,char %d: %s.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
-"||" { printf("OR at line %d,char %d: %s.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
-"." { printf("DOT at line %d,char %d: %s.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
-"!" { printf("NOT at line %d,char %d: %s.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
-"(" { printf("LP at line %d,char %d: %s.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
-")" { printf("RP at line %d,char %d: %s.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
-"[" { printf("LB at line %d,char %d: %s.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
-"]" { printf("RB at line %d,char %d: %s.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
-"{" { printf("LC at line %d,char %d: %s.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
-"}" { printf("RC at line %d,char %d: %s.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
-{ID} { printf("ID at line %d,char %d: %s.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
+{EFLOAT} { return FLOAT ; }
+{FLOAT} {return FLOAT ;}
+{HEX} { return HEX ; }
+{INT} {return INT ;}
+{OCT} { return OCT ; }
+{SINGLECOMMENT} { return COMMENT ; }
+{MULTICOMMENT} { return COMMENT ; }
+{TYPE} { return TYPE ; }
+";" { return SEMI ; }
+"," { return COMMA ; }
+"=" { return ASSIGNOP ; }
+{RELOP} { return RELOP ; }
+"+" { return PLUS ; }
+"-" { return MINUS ; }
+"*" { return STAR ; }
+"/" { return DIV ; }
+"&&" { return AND ; }
+"||" { return OR ; }
+"." { return DOT ; }
+"!" { return NOT ; }
+"(" { return LP ; }
+")" { return RP ; }
+"[" { return LB ; }
+"]" { return RB ; }
+"{" { return LC ; }
+"}" { return RC ; }
+{ID} { return ID ; }
 . { printf("ERROR at line %d,char %d, Myterious character: '%s'.\n",yylineno,charLoc,yytext); charLoc += yyleng; }
 
 %%
 
 
 int main(int argc, char** argv){
-    if(argc>1){
-        if(!(yyin=fopen(argv[1],"r"))){
-            perror(argv[1]);
-            return 1;
-        }
+    if(argc<=1) return 1;
+    FILE* f=fopen(argv[1],"r");
+    if(!f){
+        perror(argv[1]);
+        return 1;
     }
-    while (yylex()!=0)
+    yyrestart(f);
+    yyparse();
     return 0;
 }
 
