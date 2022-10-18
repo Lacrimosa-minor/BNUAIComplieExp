@@ -5,13 +5,14 @@
     extern int errors;
     YYSTYPE yylloc;
 
-    // ³õÊ¼»¯ÁÐÊý
+    // ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	int yycolumn = 1;
 
-    // Ä¬ÈÏÖÆ±í·ûµÄ³¤¶È
+    // Ä¬ï¿½ï¿½ï¿½Æ±ï¿½ï¿½ï¿½ï¿½Ä³ï¿½ï¿½ï¿½
     #define TABLEN 4
 
-    // Ã¿´Î¶¨ÒåÓÃ»§²Ù×÷Ö®Ç°Ö´ÐÐµÄ´úÂë
+    #define TESTGIT 111
+    // Ã¿ï¿½Î¶ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½Ö®Ç°Ö´ï¿½ÐµÄ´ï¿½ï¿½ï¿½
     #define YY_USER_ACTION yylloc.first_line = yylloc.last_line = yylineno; \
         yylloc.first_column = yycolumn; \
         yylloc.last_column = yycolumn + yyleng - 1; \
@@ -246,12 +247,12 @@ SPACE [ ]
     pNode->id_name = strdup(yytext);
     return ID; 
 }
-{LF} { yycolumn = 1; }           /* »»ÐÐºó£¬¸üÐÂÁÐÊý */
-{OTHER} { }                      /* ÆäËû×Ö·ûÆ¥Åä²»¸øÓè²Ù×÷ */
-{TAB} { yycolumn += TABLEN; }    /* Ä¬ÈÏÖÆ±í·û³¤¶ÈÎª 4 */
-{SPACE} { yycolumn += 1; }       /* Óöµ½¿Õ¸ñ£¬³¤¶ÈÎª 1 */
+{LF} { yycolumn = 1; }           /* ï¿½ï¿½ï¿½Ðºó£¬¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+{OTHER} { }                      /* ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½Æ¥ï¿½ä²»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+{TAB} { yycolumn += TABLEN; }    /* Ä¬ï¿½ï¿½ï¿½Æ±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª 4 */
+{SPACE} { yycolumn += 1; }       /* ï¿½ï¿½ï¿½ï¿½ï¿½Õ¸ñ£¬³ï¿½ï¿½ï¿½Îª 1 */
 . {
     errors++;
     printf("Error type A at Line %d: Mysterious charaters \'%s\'.\n", yylineno, yytext);
-}                                /* ÆäËû²»Æ¥ÅäµÄÖÕ½á·û£¬±¨´í */
+}                                /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¥ï¿½ï¿½ï¿½ï¿½Õ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 %% 
