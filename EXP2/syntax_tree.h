@@ -1,5 +1,5 @@
-// #ifndef TREE_H
-// #define TREE_H
+#ifndef TREE_H
+#define TREE_H
 
 #include <string.h>
 // #define Node   这一句实在是不知道在干什么，，，先注释掉，真出问题了再说
@@ -13,8 +13,8 @@ typedef int NODE_TYPE;        // 结点类型
 
 typedef struct Node {
     struct Node *child;       // 子结点
-    struct Node *sib;     // 兄弟节点
-    int lineno;              // 行号
+    struct Node *brother;     // 兄弟节点
+    int lineNum;              // 行号
     char *name;               // 结点名字
     NODE_TYPE type;           // 结点类型
     union {
@@ -30,4 +30,4 @@ struct Node *createNode(char *name, int line, NODE_TYPE type);
 struct Node *insertNode(struct Node *node, char *name, int line, NODE_TYPE type);
 void printNode(struct Node *node);
 void printTree(struct Node* head, int depth);
-// #endif
+#endif

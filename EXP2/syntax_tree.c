@@ -4,44 +4,44 @@
 
 struct Node *createNode(char *name, int line, NODE_TYPE type) {
     struct Node *pNode = (struct Node *) malloc(sizeof(struct Node));
-    pNode->sib = NULL;         // 新结点的兄弟为空
-    pNode->child = NULL;           // 新结点的子女为空
-    pNode->lineNum = line;         // 记录行号，之后输出有�?
-    pNode->type = type;            // 记录结点类型，根据结点类型来输出
-    pNode->name = strdup(name);    // 使用字符串拷贝赋予新结点的结点名
-    pNode->intValue = 1;           // �? int 值默认设�? 1
-    return pNode;                  // 返回 pNode
+    pNode->brother = NULL;         // 鏂扮粨鐐圭殑鍏勫紵涓虹┖
+    pNode->child = NULL;           // 鏂扮粨鐐圭殑瀛愬コ涓虹┖
+    pNode->lineNum = line;         // 璁板綍琛屽彿锛屼箣鍚庤緭鍑烘湁鐢?
+    pNode->type = type;            // 璁板綍缁撶偣绫诲瀷锛屾牴鎹粨鐐圭被鍨嬫潵杈撳嚭
+    pNode->name = strdup(name);    // 浣跨敤瀛楃涓叉嫹璐濊祴浜堟柊缁撶偣鐨勭粨鐐瑰悕
+    pNode->intValue = 1;           // 灏? int 鍊奸粯璁よ涓? 1
+    return pNode;                  // 杩斿洖 pNode
 }
 
 struct Node *insertNode(struct Node *node, char *name, int line, NODE_TYPE type) {
     struct Node *father = (struct Node *) malloc(sizeof(struct Node));
-    father->child = node;           // 给输入结点一个爹
-    father->sib = NULL;         // 父亲结点的兄弟为�?
-    father->lineNum = line;         // 记录行号，之后输出有�?
-    father->type = type;            // 记录结点类型，根据结点类型来输出
-    father->name = strdup(name);    // 使用字符串拷贝赋予新结点的结点名
-    father->intValue = 1;           // �? int 值默认设�? 1
-    head = father;                  // �? head 置为 father
-    return father;                  // 返回 father
+    father->child = node;           // 缁欒緭鍏ョ粨鐐逛竴涓埞
+    father->brother = NULL;         // 鐖朵翰缁撶偣鐨勫厔寮熶负绌?
+    father->lineNum = line;         // 璁板綍琛屽彿锛屼箣鍚庤緭鍑烘湁鐢?
+    father->type = type;            // 璁板綍缁撶偣绫诲瀷锛屾牴鎹粨鐐圭被鍨嬫潵杈撳嚭
+    father->name = strdup(name);    // 浣跨敤瀛楃涓叉嫹璐濊祴浜堟柊缁撶偣鐨勭粨鐐瑰悕
+    father->intValue = 1;           // 灏? int 鍊奸粯璁よ涓? 1
+    head = father;                  // 灏? head 缃负 father
+    return father;                  // 杩斿洖 father
 }
 
 
 void printNode(struct Node *node) {
     if (node->type == STRING_TYPE)
-        printf("%s : %s\n", node->name, node->id_name);     // string 类型的结点输出结点名和结点内�?
+        printf("%s : %s\n", node->name, node->id_name);     // string 绫诲瀷鐨勭粨鐐硅緭鍑虹粨鐐瑰悕鍜岀粨鐐瑰唴瀹?
     else if (node->type == INT_TYPE)
-        printf("INT : %d\n", node->intValue);               // int 类型的结点输�? INT 和结点�?
+        printf("INT : %d\n", node->intValue);               // int 绫诲瀷鐨勭粨鐐硅緭鍑? INT 鍜岀粨鐐瑰€?
     else if (node->type == FLOAT_TYPE)
-        printf("FLOAT : %f\n", node->floatValue);           // float 类型的结点输�? FLOAT 和结点�?
+        printf("FLOAT : %f\n", node->floatValue);           // float 绫诲瀷鐨勭粨鐐硅緭鍑? FLOAT 鍜岀粨鐐瑰€?
     else
-        printf("%s (%d)\n", node->name, node->lineNum);     // 非终结符输出结点名字和行�?
+        printf("%s (%d)\n", node->name, node->lineNum);     // 闈炵粓缁撶杈撳嚭缁撶偣鍚嶅瓧鍜岃鍙?
 }
 
 void printTree(struct Node *head, int depth) {
-    if (head == NULL) return;                       // 遇到空结点，函数结束
+    if (head == NULL) return;                       // 閬囧埌绌虹粨鐐癸紝鍑芥暟缁撴潫
     for (int i = 0; i < depth; ++i)
-        printf("\t");                         // 打印语法树所需的空白（制表符）
+        printf("\t");                         // 鎵撳嵃璇硶鏍戞墍闇€鐨勭┖鐧斤紙鍒惰〃绗︼級
     printNode(head);
-    printTree(head->child, depth + 1);       // 考虑该结点的孩子，深度加一，进入下一层递归
-    printTree((head->sib), depth);       // 考虑该结点的兄弟，深度不变，进入下一层递归
+    printTree(head->child, depth + 1);       // 鑰冭檻璇ョ粨鐐圭殑瀛╁瓙锛屾繁搴﹀姞涓€锛岃繘鍏ヤ笅涓€灞傞€掑綊
+    printTree((head->brother), depth);       // 鑰冭檻璇ョ粨鐐圭殑鍏勫紵锛屾繁搴︿笉鍙橈紝杩涘叆涓嬩竴灞傞€掑綊
 }
