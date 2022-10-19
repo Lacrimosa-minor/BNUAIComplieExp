@@ -1,0 +1,510 @@
+Starting parse
+Entering state 0
+Stack now 0
+Reading a token
+Next token is token TYPE (: )
+Shifting token TYPE (: )
+Entering state 3
+Stack now 0 3
+Reducing stack by rule 10 (line 74):
+   $1 = token TYPE (: )
+-> $$ = nterm Specifier (: )
+Entering state 7
+Stack now 0 7
+Reading a token
+Next token is token ID (: )
+Shifting token ID (: )
+Entering state 16
+Stack now 0 7 16
+Reading a token
+Next token is token LP (: )
+Shifting token LP (: )
+Entering state 21
+Stack now 0 7 16 21
+Reading a token
+Next token is token RP (: )
+Shifting token RP (: )
+Entering state 30
+Stack now 0 7 16 21 30
+Reducing stack by rule 21 (line 107):
+   $1 = token ID (: )
+   $2 = token LP (: )
+   $3 = token RP (: )
+-> $$ = nterm FunDec (: )
+Entering state 19
+Stack now 0 7 19
+Reading a token
+Next token is token LC (: )
+Shifting token LC (: )
+Entering state 25
+Stack now 0 7 19 25
+Reading a token
+Next token is token TYPE (: )
+Shifting token TYPE (: )
+Entering state 3
+Stack now 0 7 19 25 3
+Reducing stack by rule 10 (line 74):
+   $1 = token TYPE (: )
+-> $$ = nterm Specifier (: )
+Entering state 27
+Stack now 0 7 19 25 27
+Reading a token
+Next token is token ID (: )
+Shifting token ID (: )
+Entering state 34
+Stack now 0 7 19 25 27 34
+Reducing stack by rule 17 (line 93):
+   $1 = token ID (: )
+-> $$ = nterm VarDec (: )
+Entering state 40
+Stack now 0 7 19 25 27 40
+Reading a token
+Next token is token ASSIGNOP (: )
+Shifting token ASSIGNOP (: )
+Entering state 64
+Stack now 0 7 19 25 27 40 64
+Reading a token
+Next token is token INT (: )
+Shifting token INT (: )
+Entering state 55
+Stack now 0 7 19 25 27 40 64 55
+Reducing stack by rule 60 (line 223):
+   $1 = token INT (: )
+-> $$ = nterm Exp (: )
+Entering state 88
+Stack now 0 7 19 25 27 40 64 88
+Reading a token
+Next token is token SEMI (: )
+Reducing stack by rule 42 (line 170):
+   $1 = nterm VarDec (: )
+   $2 = token ASSIGNOP (: )
+   $3 = nterm Exp (: )
+-> $$ = nterm Dec (: )
+Entering state 42
+Stack now 0 7 19 25 27 42
+Next token is token SEMI (: )
+Reducing stack by rule 39 (line 164):
+   $1 = nterm Dec (: )
+-> $$ = nterm DecList (: )
+Entering state 41
+Stack now 0 7 19 25 27 41
+Next token is token SEMI (: )
+Shifting token SEMI (: )
+Entering state 65
+Stack now 0 7 19 25 27 41 65
+Reducing stack by rule 38 (line 160):
+   $1 = nterm Specifier (: )
+   $2 = nterm DecList (: )
+   $3 = token SEMI (: )
+-> $$ = nterm Def (: )
+Entering state 29
+Stack now 0 7 19 25 29
+Reading a token
+Next token is token INT (: )
+Reducing stack by rule 37 (line 158):
+-> $$ = nterm DefList (: )
+Entering state 44
+Stack now 0 7 19 25 29 44
+Reducing stack by rule 36 (line 156):
+   $1 = nterm Def (: )
+   $2 = nterm DefList (: )
+-> $$ = nterm DefList (: )
+Entering state 38
+Stack now 0 7 19 25 38
+Next token is token INT (: )
+Shifting token INT (: )
+Entering state 55
+Stack now 0 7 19 25 38 55
+Reducing stack by rule 60 (line 223):
+   $1 = token INT (: )
+-> $$ = nterm Exp (: )
+Entering state 63
+Stack now 0 7 19 25 38 63
+Reading a token
+Next token is token IF (: )
+Error: popping nterm Exp (: )
+Stack now 0 7 19 25 38
+Shifting token error (: )
+Entering state 50
+Stack now 0 7 19 25 38 50
+Reducing stack by rule 35 (line 153):
+   $1 = token error (: )
+-> $$ = nterm Stmt (: )
+Entering state 62
+Stack now 0 7 19 25 38 62
+Next token is token IF (: )
+Shifting token IF (: )
+Entering state 52
+Stack now 0 7 19 25 38 62 52
+Reading a token
+Next token is token LP (: )
+Shifting token LP (: )
+Entering state 69
+Stack now 0 7 19 25 38 62 52 69
+Reading a token
+Next token is token ID (: )
+Shifting token ID (: )
+Entering state 59
+Stack now 0 7 19 25 38 62 52 69 59
+Reading a token
+Next token is token MINUS (: )
+Reducing stack by rule 59 (line 222):
+   $1 = token ID (: )
+-> $$ = nterm Exp (: )
+Entering state 91
+Stack now 0 7 19 25 38 62 52 69 91
+Next token is token MINUS (: )
+Shifting token MINUS (: )
+Entering state 81
+Stack now 0 7 19 25 38 62 52 69 91 81
+Reading a token
+Next token is token INT (: )
+Shifting token INT (: )
+Entering state 55
+Stack now 0 7 19 25 38 62 52 69 91 81 55
+Reducing stack by rule 60 (line 223):
+   $1 = token INT (: )
+-> $$ = nterm Exp (: )
+Entering state 100
+Stack now 0 7 19 25 38 62 52 69 91 81 100
+Reading a token
+Next token is token RELOP (: )
+Reducing stack by rule 49 (line 192):
+   $1 = nterm Exp (: )
+   $2 = token MINUS (: )
+   $3 = nterm Exp (: )
+-> $$ = nterm Exp (: )
+Entering state 91
+Stack now 0 7 19 25 38 62 52 69 91
+Next token is token RELOP (: )
+Shifting token RELOP (: )
+Entering state 79
+Stack now 0 7 19 25 38 62 52 69 91 79
+Reading a token
+Next token is token INT (: )
+Shifting token INT (: )
+Entering state 55
+Stack now 0 7 19 25 38 62 52 69 91 79 55
+Reducing stack by rule 60 (line 223):
+   $1 = token INT (: )
+-> $$ = nterm Exp (: )
+Entering state 98
+Stack now 0 7 19 25 38 62 52 69 91 79 98
+Reading a token
+Next token is token RP (: )
+Reducing stack by rule 47 (line 186):
+   $1 = nterm Exp (: )
+   $2 = token RELOP (: )
+   $3 = nterm Exp (: )
+-> $$ = nterm Exp (: )
+Entering state 91
+Stack now 0 7 19 25 38 62 52 69 91
+Next token is token RP (: )
+Shifting token RP (: )
+Entering state 107
+Stack now 0 7 19 25 38 62 52 69 91 107
+Reading a token
+Next token is token LC (: )
+Shifting token LC (: )
+Entering state 25
+Stack now 0 7 19 25 38 62 52 69 91 107 25
+Reading a token
+Next token is token ID (: )
+Reducing stack by rule 37 (line 158):
+-> $$ = nterm DefList (: )
+Entering state 38
+Stack now 0 7 19 25 38 62 52 69 91 107 25 38
+Next token is token ID (: )
+Shifting token ID (: )
+Entering state 59
+Stack now 0 7 19 25 38 62 52 69 91 107 25 38 59
+Reading a token
+Next token is token ASSIGNOP (: )
+Reducing stack by rule 59 (line 222):
+   $1 = token ID (: )
+-> $$ = nterm Exp (: )
+Entering state 63
+Stack now 0 7 19 25 38 62 52 69 91 107 25 38 63
+Next token is token ASSIGNOP (: )
+Shifting token ASSIGNOP (: )
+Entering state 78
+Stack now 0 7 19 25 38 62 52 69 91 107 25 38 63 78
+Reading a token
+Next token is token ID (: )
+Shifting token ID (: )
+Entering state 59
+Stack now 0 7 19 25 38 62 52 69 91 107 25 38 63 78 59
+Reading a token
+Next token is token PLUS (: )
+Reducing stack by rule 59 (line 222):
+   $1 = token ID (: )
+-> $$ = nterm Exp (: )
+Entering state 97
+Stack now 0 7 19 25 38 62 52 69 91 107 25 38 63 78 97
+Next token is token PLUS (: )
+Shifting token PLUS (: )
+Entering state 80
+Stack now 0 7 19 25 38 62 52 69 91 107 25 38 63 78 97 80
+Reading a token
+Next token is token INT (: )
+Shifting token INT (: )
+Entering state 55
+Stack now 0 7 19 25 38 62 52 69 91 107 25 38 63 78 97 80 55
+Reducing stack by rule 60 (line 223):
+   $1 = token INT (: )
+-> $$ = nterm Exp (: )
+Entering state 99
+Stack now 0 7 19 25 38 62 52 69 91 107 25 38 63 78 97 80 99
+Reading a token
+Next token is token RC (: )
+Reducing stack by rule 48 (line 189):
+   $1 = nterm Exp (: )
+   $2 = token PLUS (: )
+   $3 = nterm Exp (: )
+-> $$ = nterm Exp (: )
+Entering state 97
+Stack now 0 7 19 25 38 62 52 69 91 107 25 38 63 78 97
+Next token is token RC (: )
+Reducing stack by rule 44 (line 177):
+   $1 = nterm Exp (: )
+   $2 = token ASSIGNOP (: )
+   $3 = nterm Exp (: )
+-> $$ = nterm Exp (: )
+Entering state 63
+Stack now 0 7 19 25 38 62 52 69 91 107 25 38 63
+Next token is token RC (: )
+Error: popping nterm Exp (: )
+Stack now 0 7 19 25 38 62 52 69 91 107 25 38
+Shifting token error (: )
+Entering state 50
+Stack now 0 7 19 25 38 62 52 69 91 107 25 38 50
+Reducing stack by rule 35 (line 153):
+   $1 = token error (: )
+-> $$ = nterm Stmt (: )
+Entering state 62
+Stack now 0 7 19 25 38 62 52 69 91 107 25 38 62
+Next token is token RC (: )
+Reducing stack by rule 28 (line 129):
+-> $$ = nterm StmtList (: )
+Entering state 76
+Stack now 0 7 19 25 38 62 52 69 91 107 25 38 62 76
+Reducing stack by rule 27 (line 127):
+   $1 = nterm Stmt (: )
+   $2 = nterm StmtList (: )
+-> $$ = nterm StmtList (: )
+Entering state 61
+Stack now 0 7 19 25 38 62 52 69 91 107 25 38 61
+Next token is token RC (: )
+Shifting token RC (: )
+Entering state 75
+Stack now 0 7 19 25 38 62 52 69 91 107 25 38 61 75
+Reducing stack by rule 26 (line 122):
+   $1 = token LC (: )
+   $2 = nterm DefList (: )
+   $3 = nterm StmtList (: )
+   $4 = token RC (: )
+-> $$ = nterm CompSt (: )
+Entering state 60
+Stack now 0 7 19 25 38 62 52 69 91 107 60
+Reducing stack by rule 30 (line 132):
+   $1 = nterm CompSt (: )
+-> $$ = nterm Stmt (: )
+Entering state 112
+Stack now 0 7 19 25 38 62 52 69 91 107 112
+Reading a token
+Next token is token TYPE (: )
+Reducing stack by rule 32 (line 136):
+   $1 = token IF (: )
+   $2 = token LP (: )
+   $3 = nterm Exp (: )
+   $4 = token RP (: )
+   $5 = nterm Stmt (: )
+-> $$ = nterm Stmt (: )
+Entering state 62
+Stack now 0 7 19 25 38 62 62
+Next token is token TYPE (: )
+
+这里到底是为啥？？？从哪里移进的错误，我真找不出
+Shifting token error (: )
+
+
+
+
+Entering state 50
+Stack now 0 7 19 25 38 62 62 50
+Reducing stack by rule 35 (line 153):
+   $1 = token error (: )
+-> $$ = nterm Stmt (: )
+Entering state 62
+Stack now 0 7 19 25 38 62 62 62
+Next token is token TYPE (: )
+Error: discarding token TYPE (: )
+Shifting token error (: )
+Entering state 50
+Stack now 0 7 19 25 38 62 62 62 50
+Reducing stack by rule 35 (line 153):
+   $1 = token error (: )
+-> $$ = nterm Stmt (: )
+Entering state 62
+Stack now 0 7 19 25 38 62 62 62 62
+Reading a token
+Next token is token ID (: )
+Shifting token ID (: )
+Entering state 59
+Stack now 0 7 19 25 38 62 62 62 62 59
+Reading a token
+Next token is token LB (: )
+Reducing stack by rule 59 (line 222):
+   $1 = token ID (: )
+-> $$ = nterm Exp (: )
+Entering state 63
+Stack now 0 7 19 25 38 62 62 62 62 63
+Next token is token LB (: )
+Shifting token LB (: )
+Entering state 87
+Stack now 0 7 19 25 38 62 62 62 62 63 87
+Reading a token
+Next token is token ID (: )
+Shifting token ID (: )
+Entering state 59
+Stack now 0 7 19 25 38 62 62 62 62 63 87 59
+Reading a token
+Next token is token ASSIGNOP (: )
+Reducing stack by rule 59 (line 222):
+   $1 = token ID (: )
+-> $$ = nterm Exp (: )
+Entering state 106
+Stack now 0 7 19 25 38 62 62 62 62 63 87 106
+Next token is token ASSIGNOP (: )
+Shifting token ASSIGNOP (: )
+Entering state 78
+Stack now 0 7 19 25 38 62 62 62 62 63 87 106 78
+Reading a token
+Next token is token FLOAT (: )
+Shifting token FLOAT (: )
+Entering state 54
+Stack now 0 7 19 25 38 62 62 62 62 63 87 106 78 54
+Reducing stack by rule 61 (line 224):
+   $1 = token FLOAT (: )
+-> $$ = nterm Exp (: )
+Entering state 97
+Stack now 0 7 19 25 38 62 62 62 62 63 87 106 78 97
+Reading a token
+Next token is token SEMI (: )
+Reducing stack by rule 44 (line 177):
+   $1 = nterm Exp (: )
+   $2 = token ASSIGNOP (: )
+   $3 = nterm Exp (: )
+-> $$ = nterm Exp (: )
+Entering state 106
+Stack now 0 7 19 25 38 62 62 62 62 63 87 106
+Next token is token SEMI (: )
+Error: popping nterm Exp (: )
+Stack now 0 7 19 25 38 62 62 62 62 63 87
+Error: popping token LB (: )
+Stack now 0 7 19 25 38 62 62 62 62 63
+Error: popping nterm Exp (: )
+Stack now 0 7 19 25 38 62 62 62 62
+Shifting token error (: )
+Entering state 50
+Stack now 0 7 19 25 38 62 62 62 62 50
+Reducing stack by rule 35 (line 153):
+   $1 = token error (: )
+-> $$ = nterm Stmt (: )
+Entering state 62
+Stack now 0 7 19 25 38 62 62 62 62 62
+Next token is token SEMI (: )
+Error: discarding token SEMI (: )
+Shifting token error (: )
+Entering state 50
+Stack now 0 7 19 25 38 62 62 62 62 62 50
+Reducing stack by rule 35 (line 153):
+   $1 = token error (: )
+-> $$ = nterm Stmt (: )
+Entering state 62
+Stack now 0 7 19 25 38 62 62 62 62 62 62
+Reading a token
+Next token is token RC (: )
+Reducing stack by rule 28 (line 129):
+-> $$ = nterm StmtList (: )
+Entering state 76
+Stack now 0 7 19 25 38 62 62 62 62 62 62 76
+Reducing stack by rule 27 (line 127):
+   $1 = nterm Stmt (: )
+   $2 = nterm StmtList (: )
+-> $$ = nterm StmtList (: )
+Entering state 76
+Stack now 0 7 19 25 38 62 62 62 62 62 76
+Reducing stack by rule 27 (line 127):
+   $1 = nterm Stmt (: )
+   $2 = nterm StmtList (: )
+-> $$ = nterm StmtList (: )
+Entering state 76
+Stack now 0 7 19 25 38 62 62 62 62 76
+Reducing stack by rule 27 (line 127):
+   $1 = nterm Stmt (: )
+   $2 = nterm StmtList (: )
+-> $$ = nterm StmtList (: )
+Entering state 76
+Stack now 0 7 19 25 38 62 62 62 76
+Reducing stack by rule 27 (line 127):
+   $1 = nterm Stmt (: )
+   $2 = nterm StmtList (: )
+-> $$ = nterm StmtList (: )
+Entering state 76
+Stack now 0 7 19 25 38 62 62 76
+Reducing stack by rule 27 (line 127):
+   $1 = nterm Stmt (: )
+   $2 = nterm StmtList (: )
+-> $$ = nterm StmtList (: )
+Entering state 76
+Stack now 0 7 19 25 38 62 76
+Reducing stack by rule 27 (line 127):
+   $1 = nterm Stmt (: )
+   $2 = nterm StmtList (: )
+-> $$ = nterm StmtList (: )
+Entering state 61
+Stack now 0 7 19 25 38 61
+Next token is token RC (: )
+Shifting token RC (: )
+Entering state 75
+Stack now 0 7 19 25 38 61 75
+Reducing stack by rule 26 (line 122):
+   $1 = token LC (: )
+   $2 = nterm DefList (: )
+   $3 = nterm StmtList (: )
+   $4 = token RC (: )
+-> $$ = nterm CompSt (: )
+Entering state 26
+Stack now 0 7 19 26
+Reducing stack by rule 6 (line 61):
+   $1 = nterm Specifier (: )
+   $2 = nterm FunDec (: )
+   $3 = nterm CompSt (: )
+-> $$ = nterm ExtDef (: )
+Entering state 6
+Stack now 0 6
+Reading a token
+Now at end of input.
+Reducing stack by rule 3 (line 54):
+-> $$ = nterm ExtDefList (: )
+Entering state 13
+Stack now 0 6 13
+Reducing stack by rule 2 (line 52):
+   $1 = nterm ExtDef (: )
+   $2 = nterm ExtDefList (: )
+-> $$ = nterm ExtDefList (: )
+Entering state 5
+Stack now 0 5
+Reducing stack by rule 1 (line 50):
+   $1 = nterm ExtDefList (: )
+-> $$ = nterm Program (: )
+Entering state 4
+Stack now 0 4
+Now at end of input.
+Shifting token "end of file" (: )
+Entering state 12
+Stack now 0 4 12
+Stack now 0 4 12
+Cleanup: popping token "end of file" (: )
+Cleanup: popping nterm Program (: )

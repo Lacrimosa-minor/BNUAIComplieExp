@@ -1,0 +1,4 @@
+ERROR type A at line 3,char 5, Mysterious character: '%'.
+ERROR type B at line 4. Missing character: ';'
+ERROR type B at line 6. Missing character: ';'
+ERROR type B at line 7. Missing character: ']'

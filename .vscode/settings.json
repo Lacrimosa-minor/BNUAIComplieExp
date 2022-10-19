@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "malloc.h": "c",
+        "syntax_tree.h": "c"
+    }
+}

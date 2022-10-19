@@ -2,7 +2,7 @@
 	#include<stdio.h>
 	#include"lex.yy.c"
 	#include"syntax_tree.h"
-
+	// #include "syntax_tree.c"
 %}
 
 %token STRUCT
@@ -47,7 +47,8 @@
 
 %%
 /*High-level Definition*/
-Program : ExtDefList
+Program : ExtDefList {$$ = insertNode($1, "Program", @1.first_line, NONTERMINAL);}
+						// printTree($$, 0);}
 
 ExtDefList : ExtDef ExtDefList { $$ = insertNode($1, "ExtDefList", @1.first_line, NONTERMINAL);
 								 $1 -> brother = $2;}
@@ -56,12 +57,12 @@ ExtDefList : ExtDef ExtDefList { $$ = insertNode($1, "ExtDefList", @1.first_line
 ExtDef : Specifier ExtDecList  SEMI { $$ = insertNode($1, "ExtDef", @1.first_line, NONTERMINAL);
 									 $1 -> brother = $2;
 									 $2 -> brother = $3;}
-		| Specifier  SEMI{ $$ = insertNode($1, "ExtDef", @1.first_line, NONTERMINAL);
+		| Specifier  SEMI { $$ = insertNode($1, "ExtDef", @1.first_line, NONTERMINAL);
 						  $1 -> brother = $2;}
 		| Specifier FunDec CompSt { $$ = insertNode($1, "ExtDef", @1.first_line, NONTERMINAL);
 									$1 -> brother = $2;
 									$2 -> brother = $3;}
-		| error
+		| error {yylloc.missing_flag = 1; yylloc.missing_char = s_pop(yylloc.stackptr);yyerror();}
 
 ExtDecList : VarDec { $$ = insertNode($1, "ExtDecList", @1.first_line, NONTERMINAL);}
 		| VarDec COMMA ExtDecList { $$ = insertNode($1, "ExtDecList", @1.first_line, NONTERMINAL);
@@ -99,6 +100,7 @@ VarDec : ID { $$ = insertNode($1, "VarDec", @1.first_line, NONTERMINAL);}
 							$1 -> brother = $2;
 							$2 -> brother = $3;
 							$3 -> brother = $4;}
+		| error {yylloc.missing_flag = 1; yylloc.missing_char = s_pop(yylloc.stackptr);yyerror();}
 
 FunDec : ID LP VarList  RP {$$ = insertNode($1, "FunDec", @1.first_line, NONTERMINAL);
 							$1 -> brother = $2;
@@ -107,7 +109,7 @@ FunDec : ID LP VarList  RP {$$ = insertNode($1, "FunDec", @1.first_line, NONTERM
 		| ID LP  RP {$$ = insertNode($1, "FunDec", @1.first_line, NONTERMINAL);
 					$1 -> brother = $2;
 					$2 -> brother = $3;}
-		| error
+		| error {yylloc.missing_flag = 1; yylloc.missing_char = s_pop(yylloc.stackptr);yyerror();}
 
 VarList : ParamDec COMMA VarList{$$ = insertNode($1, "VarList", @1.first_line, NONTERMINAL);
 					$1 -> brother = $2;
@@ -119,14 +121,21 @@ ParamDec : Specifier VarDec {$$ = insertNode($1, "ParamDec", @1.first_line, NONT
 
 /*Statements*/
 
-CompSt : LC DefList StmtList  RC {$$ = insertNode($1, "CompSt", @1.first_line, NONTERMINAL);
-							$1 -> brother = $2;
-							$2 -> brother = $3;
-							$3 -> brother = $4;}
+InnerCompSt : Def InnerCompSt {$$ = insertNode($1, "InnerCompSt", @1.first_line, NONTERMINAL);
+							$1 -> brother = $2;}
+			| Stmt InnerCompSt {$$ = insertNode($1, "InnerCompSt", @1.first_line, NONTERMINAL);
+							$1 -> brother = $2;}
+			| /*empty*/ {$$ = insertNode(NULL, "InnerCompSt", -1, NONTERMINAL);}
+			// | Def {$$ = insertNode($1, "InnerCompSt", @1.first_line, NONTERMINAL);}
 
-StmtList : Stmt StmtList {$$ = insertNode($1, "StmtList", @1.first_line, NONTERMINAL);
-					$1 -> brother = $2;}
-		| /*empty*/ { $$ = insertNode(NULL, "StmtList", -1, NONTERMINAL);}
+
+CompSt : LC InnerCompSt  RC {$$ = insertNode($1, "CompSt", @1.first_line, NONTERMINAL);
+							$1 -> brother = $2;
+							$2 -> brother = $3;}
+
+// StmtList : Stmt StmtList {$$ = insertNode($1, "StmtList", @1.first_line, NONTERMINAL);
+// 					$1 -> brother = $2;}
+// 		| /*empty*/ { $$ = insertNode(NULL, "StmtList", -1, NONTERMINAL);}
 
 Stmt : Exp  SEMI
 		| CompSt
@@ -150,7 +159,7 @@ Stmt : Exp  SEMI
 							$2 -> brother = $3;
 							$3 -> brother = $4;
 							$4 -> brother = $5;}
-		| error {}
+		| error {yylloc.missing_flag = 1; yylloc.missing_char = s_pop(yylloc.stackptr);yyerror();}
 /*Local Definitions*/
 
 DefList : Def DefList {$$ = insertNode($1, "DefList", @1.first_line, NONTERMINAL);
@@ -170,7 +179,7 @@ Dec : VarDec {$$ = insertNode($1, "Dec", @1.first_line, NONTERMINAL);}
 		| VarDec ASSIGNOP Exp {$$ = insertNode($1, "Dec", @1.first_line, NONTERMINAL);
 							$1 -> brother = $2;
 							$2 -> brother = $3;}
-		| error
+		// | error {yylloc.missing_flag = 1; yylloc.missing_char = s_pop(yylloc.stackptr);yyerror();}
 
 /*Expressions*/
 
@@ -233,13 +242,26 @@ Args : Exp COMMA Args {$$ = insertNode($1, "Args", @1.first_line, NONTERMINAL);
 %%
 int yyerror()
 {
-	printf("ERROR type B at line %d.\n", yylloc.first_line);
+	if(yylloc.missing_flag){
+		printf("ERROR type B at line %d. Missing character: '%c'\n", yylloc.first_line, yylloc.missing_char);
+		yylloc.missing_flag = 0;
+		return 0;
+	}
+	// printf("ERROR type B at line %d. Sytax error.\n", yylloc.first_line);
+	// return 0;
+	
 }
 
 int main(int argc, char** argv){
    	if(argc <=1) {
 		return 1;
 	}
+
+    mystack.top = 0;
+    mystack.Waiting_RC_Flag = 0;
+    yylloc.stackptr = &mystack;
+	yylloc.missing_char = '#';
+	yylloc.missing_flag = 0;
    	FILE* f = fopen(argv[1], "r");
    	if(!f){
 		perror(argv[1]);

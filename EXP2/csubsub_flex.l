@@ -19,9 +19,7 @@
     int yycolumn = 1;
     int charLoc = 1;
     sign_stack mystack;
-    mystack.top = 0;
-    mystack.Waiting_RC_Flag = 0;
-    yylloc.stackptr = &mystack;
+
     #define YY_USER_ACTION yylloc.first_line=yylloc.last_line=yylineno;\
     yylloc.first_column=yycolumn;\
     yylloc.last_column=yycolumn+yyleng-1;\
@@ -52,34 +50,34 @@ RELOP >|<|(>=)|(<=)|(==)|(!=)
     struct Node *pNode = createNode("STRUCT", 0, STRING_TYPE);
     yylval = pNode;
     pNode->id_name = strdup(yytext);
-    push(S_START1, &mystack);
+    push(S_START1, yylloc.stackptr);
     return STRUCT;  }
 "return" { 
     struct Node *pNode = createNode("RETURN", 0, STRING_TYPE);
     yylval = pNode;
     pNode->id_name = strdup(yytext);
-    push(S_START1, &mystack);
+    push(S_START1, yylloc.stackptr);
     return RETURN; 
 }
 "if" { 
     struct Node *pNode = createNode("IF", 0, STRING_TYPE);
     yylval = pNode;
     pNode->id_name = strdup(yytext);
-    push(S_START2, &mystack);
+    push(S_START2, yylloc.stackptr);
     return IF; 
 }
 "else" { 
     struct Node *pNode = createNode("ELSE", 0, STRING_TYPE);
     yylval = pNode;
     pNode->id_name = strdup(yytext);
-    push(S_START2, &mystack);
+    push(S_START2, yylloc.stackptr);
     return ELSE; 
 }
 "while"  { 
     struct Node *pNode = createNode("WHILE", 0, STRING_TYPE);
     yylval = pNode;
     pNode->id_name = strdup(yytext);
-    push(S_START2, &mystack);
+    push(S_START2, yylloc.stackptr);
     return WHILE; 
 }
 
@@ -91,28 +89,28 @@ RELOP >|<|(>=)|(<=)|(==)|(!=)
     struct Node *pNode = createNode("FLOAT", 0, FLOAT_TYPE);
     yylval = pNode;
     pNode->floatValue = atof(yytext);
-    push(S_START1, &mystack);
+    push(S_START1, yylloc.stackptr);
     return FLOAT;  }
 {FLOAT} { 
     struct Node *pNode = createNode("FLOAT", 0, FLOAT_TYPE);
     yylval = pNode;
     pNode->floatValue = atof(yytext);
-    push(S_START1, &mystack);
+    push(S_START1, yylloc.stackptr);
     return FLOAT; }
 {HEX} { struct Node *pNode = createNode("INT", 0, INT_TYPE);
         yylval = pNode;
         pNode->intValue = atoi(yytext);
-        push(S_START1, &mystack);
+        push(S_START1, yylloc.stackptr);
         return INT ; }
 {INT} { struct Node *pNode = createNode("INT", 0, INT_TYPE);
         yylval = pNode;
         pNode->intValue = atoi(yytext);
-        push(S_START1, &mystack);
+        push(S_START1, yylloc.stackptr);
         return INT; }
 {OCT} { struct Node *pNode = createNode("INT", 0, INT_TYPE);
         yylval = pNode;
         pNode->intValue = atoi(yytext);
-        push(S_START1, &mystack);
+        push(S_START1, yylloc.stackptr);
         return INT ; }
 {SINGLECOMMENT} {} 
 {MULTICOMMENT} {}
@@ -120,13 +118,13 @@ RELOP >|<|(>=)|(<=)|(==)|(!=)
     struct Node *pNode = createNode("TYPE", 0, STRING_TYPE);
     yylval = pNode;
     pNode->id_name = strdup(yytext);
-    push(S_START2, &mystack);
+    push(S_START2, yylloc.stackptr);
     return TYPE;  }
 ";" { 
     struct Node *pNode = createNode("SEMI", 0, STRING_TYPE);
     yylval = pNode;
     pNode->id_name = strdup(yytext);
-    push(S_SEMI, &mystack);
+    push(S_SEMI, yylloc.stackptr);
     return SEMI;  }
 "," { 
     struct Node *pNode = createNode("COMMA", 0, STRING_TYPE);
@@ -190,42 +188,42 @@ RELOP >|<|(>=)|(<=)|(==)|(!=)
     struct Node *pNode = createNode("LP", 0, STRING_TYPE);
     yylval = pNode;
     pNode->id_name = strdup(yytext);
-    push(S_LP, &mystack);
+    push(S_LP, yylloc.stackptr);
     return LP; 
 }
 ")" { 
     struct Node *pNode = createNode("RP", 0, STRING_TYPE);
     yylval = pNode;
     pNode->id_name = strdup(yytext);
-    push(S_RP, &mystack);
+    push(S_RP, yylloc.stackptr);
     return RP; 
 }
 "[" { 
     struct Node *pNode = createNode("LB", 0, STRING_TYPE);
     yylval = pNode;
     pNode->id_name = strdup(yytext);
-    push(S_LB, &mystack);
+    push(S_LB, yylloc.stackptr);
     return LB; 
 }
 "]"  { 
     struct Node *pNode = createNode("RB", 0, STRING_TYPE);
     yylval = pNode;
     pNode->id_name = strdup(yytext);
-    push(S_RB, &mystack);
+    push(S_RB, yylloc.stackptr);
     return RB; 
 }
 "{" { 
     struct Node *pNode = createNode("LC", 0, STRING_TYPE);
     yylval = pNode;
     pNode->id_name = strdup(yytext);
-    push(S_LC, &mystack);
+    push(S_LC, yylloc.stackptr);
     return LC; 
 }
 "}" { 
     struct Node *pNode = createNode("RC", 0, STRING_TYPE);
     yylval = pNode;
     pNode->id_name = strdup(yytext);
-    push(S_RC, &mystack);
+    push(S_RC, yylloc.stackptr);
     return RC; 
 }
 
@@ -240,7 +238,7 @@ RELOP >|<|(>=)|(<=)|(==)|(!=)
     struct Node *pNode = createNode("ID", 0, STRING_TYPE);
     yylval = pNode;
     pNode->id_name = strdup(yytext);
-    push(S_START1, &mystack);
+    push(S_START1, yylloc.stackptr);
     return ID;  
 }
 . {printf("ERROR type A at line %d,char %d, Mysterious character: '%s'.\n",yylineno,charLoc,yytext); charLoc += yyleng;}
