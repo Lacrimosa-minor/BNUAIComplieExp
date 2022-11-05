@@ -2,20 +2,37 @@
 //...以上是示例，推荐用宏定义符号类型，这样子的话，避免了复杂的字符串处理函数，方便写代码，并且代码可读性很好，采用常量constant也是可以的。
 //为了实现这个，可能需要改一改树相关代码
 
-enum node_type
+typedef enum node_type
 {
     // NONTERMINAL
     N_PROGRAM,
     N_EXT_DEF_L,
     N_EXT_DEF,
+    N_EXT_DEC_L,
     N_FUN_DEC,
-    
+    N_SPECI,
+    N_STRUCT_SPECI,
+    N_OPT_TAG,
+    N_TAG,
+    N_VAR_DEC,
+    N_VAR_L,
+    N_EXP,
+    N_STMT,
+    N_PARAM_DEC,
+    N_COMPST,
+    N_STMT_L,
+    N_DEF_L,
+    N_DEF,
+    N_DEC,
+    N_DEC_L,
+    N_ARGS,
+
     //TERMINAL
-    N_INT,
-    N_FLOAT,
+    N_INT ,
+    N_FLOAT = 100,
     N_ID,
     N_TYPE,
-    N_ID,
+    N_LF,
     N_SEMI,
     N_COMMA,
     N_DOT,
@@ -39,14 +56,7 @@ enum node_type
     N_IF,
     N_ELSE,
     N_WHILE
-};
-
-enum var_type{
-    V_INT,
-    V_FLOAT,
-    V_ARRAY
-
-};
+} node_type;
 
 typedef struct node
 {
@@ -54,14 +64,15 @@ typedef struct node
     int line_no; //行号
     struct node *child;
     struct node *sibling;
-    enum node_type type;
+    node_type nodeType;
+    // int flag;//遍历标记
     union
     {
         int intVal;
         float floatVal;
         char *IDVal;
     } subtype;
-} * treeNode;
+} treeNode;
 
 typedef treeNode Tree;
 
