@@ -75,7 +75,7 @@ typedef struct node
 } treeNode;
 
 typedef treeNode Tree;
-Tree myTree;
+
 
 void nodeInit(treeNode *node, char *character, int line_no, treeNode *child, treeNode *sibling, node_type mytype)
 {
@@ -165,13 +165,13 @@ void rev_push(seqStack *s, treeNode *t)
     // t->flag = 0;
 }
 
-treeNode pop(seqStack *s) // pop
+treeNode* pop(seqStack *s) // pop
 {
-    treeNode t;
+    treeNode* t;
     if (s->top != 0)
     {
         s->top--;
-        treeNode t = *(s->tree[s->top]);
+        treeNode* t = s->tree[s->top];
         return t;
     }
     else
@@ -232,12 +232,13 @@ void Pre_order(treeNode *t) //用栈实现遍历tree
 
     while (!isEmpty(s))
     {
-        treeNode n = pop(s); //节点出栈
+        treeNode* n; 
+        n = pop(s); //节点出栈
 
         //处理该节点
-        if (!n.child)
+        if (!n->child)
         {
-            reversed_insert(s, &n); // n的孩子逆序入栈
+            reversed_insert(s, n); // n的孩子逆序入栈
         }
     }
 }

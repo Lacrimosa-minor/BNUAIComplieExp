@@ -2,7 +2,7 @@
     #include <stdio.h>
     #include <stdlib.h>
     #include "tree.c"
-
+    #include "analyser.c"
     #define YYSTYPE treeNode
 
     int line_check[5000];
@@ -11,6 +11,7 @@
     void myerror(char *msg);
     int yylex();
     int error_count = 0;
+    Tree myTree;
 %}
 %token INT                         /* int 类型 */
 %token FLOAT                       /* float 类型 */
@@ -490,6 +491,7 @@ int main(int argc, char** argv)
     if(error_count == 0)
         preOrderTraverse(myTree, 0);
         
+      
 	return 0;
 }
 
